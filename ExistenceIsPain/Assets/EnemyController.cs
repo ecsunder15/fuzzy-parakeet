@@ -22,8 +22,8 @@ public class EnemyController : MonoBehaviour {
 		angle += rotateSpeed * Time.deltaTime;
 
 		//set the circular angle point thing to rotate around
-		var offset = new Vector2(Mathf.Sin(_angle), Mathf.Cos(_angle)) * Radius;
-		transform.position = _centre + offset;
+		var offset = new Vector2(Mathf.Sin(angle), Mathf.Cos(angle)) * radius;
+		transform.position = target + offset;
 	}
 
 }

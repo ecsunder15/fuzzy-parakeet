@@ -123,6 +123,7 @@ GameObject:
   - component: {fileID: 279494333}
   - component: {fileID: 279494332}
   - component: {fileID: 279494335}
+  - component: {fileID: 279494336}
   m_Layer: 0
   m_Name: Enemy
   m_TagString: Untagged
@@ -232,6 +233,19 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
+--- !u!114 &279494336
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 279494331}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fd17c1a5501054a9ab546292c3cc1ea3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  rotateSpeed: 2
+  radius: 5
 --- !u!1 &426265177
 GameObject:
   m_ObjectHideFlags: 0
@@ -983,7 +997,7 @@ MonoBehaviour:
   m_Script: {fileID: 1301386320, guid: f5f67c52d1564df4a8936ccd202a3bd8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_IgnoreReversedGraphics: 1
+  m_IgnoreReversedGraphics: 0
   m_BlockingObjects: 0
   m_BlockingMask:
     serializedVersion: 2
@@ -3304,7 +3318,7 @@ Tilemap:
   - first: {x: 13, y: 4, z: 0}
     second:
       m_TileIndex: 1
-      m_TileSpriteIndex: 1
+      m_TileSpriteIndex: 5
       m_TileMatrixIndex: 0
       m_TileColorIndex: 0
       m_ObjectToInstantiate: {fileID: 0}
@@ -3462,16 +3476,16 @@ Tilemap:
   m_TileSpriteArray:
   - m_RefCount: 6
     m_Data: {fileID: 21300000, guid: e75b64c6b583eba4bae6d1d50bf7c95b, type: 3}
-  - m_RefCount: 1
-    m_Data: {fileID: 21300000, guid: 65fc2ec6163c04c468bc52942639dca0, type: 3}
+  - m_RefCount: 0
+    m_Data: {fileID: 0}
   - m_RefCount: 20
     m_Data: {fileID: 21300000, guid: af96d639677612746abbe75831fe0fbe, type: 3}
   - m_RefCount: 215
     m_Data: {fileID: 21300000, guid: b0e851846a692984aa4252dc84aaf3aa, type: 3}
   - m_RefCount: 8
     m_Data: {fileID: 21300000, guid: 8f2cb2dbff8b6414eaf72570fb2cdc3f, type: 3}
-  - m_RefCount: 0
-    m_Data: {fileID: 0}
+  - m_RefCount: 1
+    m_Data: {fileID: 21300000, guid: 65fc2ec6163c04c468bc52942639dca0, type: 3}
   m_TileMatrixArray:
   - m_RefCount: 250
     m_Data:
