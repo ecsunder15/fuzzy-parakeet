@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class PlayerController : MonoBehaviour {
 
@@ -25,6 +26,7 @@ public class PlayerController : MonoBehaviour {
 	private KeyCode right = KeyCode.D;
 	private KeyCode left = KeyCode.A;
 	private KeyCode jump = KeyCode.Space;
+    private KeyCode reset = KeyCode.R;
 
 
 	// Use this for initialization
@@ -77,6 +79,16 @@ public class PlayerController : MonoBehaviour {
     void updateHealth()
     {
         healthBar.value = health / maxHealth;
+        checkHealth();
+    }
+
+    void checkHealth()
+    {
+        if (health <= 0)
+        {
+            SceneManager.LoadScene(1);
+        }
+
     }
 
 	void OnCollisionEnter2D(Collision2D collide){
