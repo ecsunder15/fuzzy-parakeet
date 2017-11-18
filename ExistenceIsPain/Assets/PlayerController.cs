@@ -80,6 +80,9 @@ public class PlayerController : MonoBehaviour {
 			velocity.y *= .8f;
 		}
 
+		if (Input.GetKeyDown (reset)) {
+			SceneManager.LoadScene(0);
+		}
 
 		player.position += velocity * Time.deltaTime;
 
