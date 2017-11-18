@@ -26,14 +26,23 @@ public class PlayerController : MonoBehaviour {
 	private KeyCode left = KeyCode.A;
 	private KeyCode jump = KeyCode.Space;
 
+	//KREEEEE
+	Animator anim;
+	public bool facingLeft;
 
 	// Use this for initialization
 	void Start () {
 		player = this.gameObject.transform;
+
+		//KREEEEEE
+		anim = GetComponent<Animator>();
+		facingLeft = false;
 	}
 	
 	// Update is called once per frame
 	void Update () {
+
+
 		if (Input.GetKey (right)) {
 			velocity.x += delta;
 			if (velocity.x > maxSpeed) {
@@ -41,16 +50,27 @@ public class PlayerController : MonoBehaviour {
 			}
 			if (velocity.x < 0)
 				velocity.x = 0;
-		} else if (Input.GetKey (left)) {
+
+			//KREEEEEE
+			facingLeft = false;
+
+		} 
+		else if (Input.GetKey (left)) {
 			velocity.x -= delta;
 			if (velocity.x < -1* maxSpeed) {
 				velocity.x = -1* maxSpeed;
 			}
 			if (velocity.x > 0)
 				velocity.x = 0;
-		} else {
+
+			//KREEEEEE
+			facingLeft = true;
+
+		} 
+		else {
 			velocity.x = 0;
 		}
+			
 		if (jumps < maxJumps && Input.GetKeyDown (jump)) {
 			velocity.y += jumpSpeed;
 			jumps += 1;
@@ -60,6 +80,18 @@ public class PlayerController : MonoBehaviour {
 
 
 		player.position += velocity * Time.deltaTime;
+
+
+		//KREEEEE
+		 
+		{
+			float move = velocity.x;
+			//float move = Input.GetAxis ("Horizontal");
+			anim.SetFloat ("Speed", move);
+			anim.SetBool ("FacingLeft", facingLeft);
+		}
+		//unkree
+
 	}
 
     void dealDamagae(float damage = 5)
