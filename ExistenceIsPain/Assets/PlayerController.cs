@@ -1,6 +1,8 @@
-﻿using System.Collections;
+﻿
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PlayerController : MonoBehaviour {
 
@@ -12,6 +14,13 @@ public class PlayerController : MonoBehaviour {
 	private float maxSpeed = 8f;
 	private Transform player;
 	private Vector3 velocity = Vector3.zero;
+
+    public float health = 50f;
+    private float maxHealth = 100f;
+    private float healAmount = 5;
+    private float damageAmount = 10;
+
+    public Slider healthBar;
 
 	private KeyCode right = KeyCode.D;
 	private KeyCode left = KeyCode.A;
@@ -53,10 +62,43 @@ public class PlayerController : MonoBehaviour {
 		player.position += velocity * Time.deltaTime;
 	}
 
+    void dealDamagae(float damage = 5)
+    {
+        health -= damage;
+        updateHealth();
+    }
+
+    void heal(float damage = 5)
+    {
+        health += damage;
+        updateHealth();
+    }
+
+    void updateHealth()
+    {
+        healthBar.value = health / maxHealth;
+    }
+
 	void OnCollisionEnter2D(Collision2D collide){
 		//grounded
 		if (collide.gameObject.tag == "Ground") {
 			jumps = 0;
 		}
-	}
+
+        if (collide.gameObject.tag == "Projectile")
+        {
+            dealDamagae();
+        }
+        if (collide.gameObject.tag == "Spikes")
+        {
+            dealDamagae();
+        }
+
+        if (collide.gameObject.tag == "Health")
+        {
+            heal();
+        }
+    }
+
+    
 }
