@@ -23,7 +23,7 @@ public class PlayerController : MonoBehaviour {
     private float damageAmount = 100;
 	private Scene scene;
 
-    private float deadTime = 1.5f;
+    private float deadTime = 2f;
     private float timeOfDeath;
 
     private float startTime = 0f;
@@ -32,6 +32,7 @@ public class PlayerController : MonoBehaviour {
     public Slider healthBar;
     public Text timeText;
 	public GameObject deadImage;
+	public GameObject savedImage;
 
     private KeyCode right = KeyCode.D;
 	private KeyCode left = KeyCode.A;
@@ -41,6 +42,7 @@ public class PlayerController : MonoBehaviour {
 	Animator anim;
 	public bool facingLeft;
 	public bool dead = false;
+	public bool saved  = false;
 
 	private CapsuleCollider2D playerCollider;
 
@@ -72,7 +74,7 @@ public class PlayerController : MonoBehaviour {
             SceneManager.LoadScene(currentLevel);
         }
 
-        if (dead)
+		if (dead || saved)
         {
             updateScene();
             return;
@@ -144,6 +146,7 @@ public class PlayerController : MonoBehaviour {
         timeAlive = Time.fixedTime - startTime;
         timeText.text = "Time: " + timeAlive.ToString("F2");
     }
+
     private void heal(float damage = 5)
     {
         health += damage;
@@ -158,15 +161,20 @@ public class PlayerController : MonoBehaviour {
 
     private void checkHealth()
     {
-		
-        if (health <= 0)
-        {
-            timeOfDeath = Time.fixedTime;
+		if (health >= 100f) {
+			timeOfDeath = Time.fixedTime;
+			saved = true;
+			savedImage.SetActive (true);
+			anim.SetBool ("Died", true);
+			return;
+		}
+		if (health <= 0) {
+			timeOfDeath = Time.fixedTime;
 			dead = true;
 			anim.SetBool ("Died", true);
-			deadImage.SetActive(true);
+			deadImage.SetActive (true);
 			playerCollider.isTrigger = true;
-        }
+		}
 
     }
 
@@ -176,31 +184,33 @@ public class PlayerController : MonoBehaviour {
 
         if (Time.fixedTime - timeOfDeath > deadTime)
         {
-
-            switch (currentLevel)
-            {
-                case "Level1":
-                    SceneManager.LoadScene("Level2");
-                    break;
-                case "Level2":
-                    SceneManager.LoadScene("Level3");
-                    break;
-                case "Level3":
-                    SceneManager.LoadScene("Level4");
-                    break;
-                case "Level4":
-                    SceneManager.LoadScene("Level5");
-                    break;
-                case "Level5":
-                    SceneManager.LoadScene("Level6");
-                    break;
-                case "Level6":
-                    SceneManager.LoadScene("Level7");
-                    break;
-                case "Level7":
-                    SceneManager.LoadScene("Level8");
-                    break;
-            }
+			if (dead) {
+				switch (currentLevel) {
+				case "Level1":
+					SceneManager.LoadScene ("Level2");
+					break;
+				case "Level2":
+					SceneManager.LoadScene ("Level3");
+					break;
+				case "Level3":
+					SceneManager.LoadScene ("Level4");
+					break;
+				case "Level4":
+					SceneManager.LoadScene ("Level5");
+					break;
+				case "Level5":
+					SceneManager.LoadScene ("Level6");
+					break;
+				case "Level6":
+					SceneManager.LoadScene ("Level7");
+					break;
+				case "Level7":
+					SceneManager.LoadScene ("Level8");
+					break;
+				}
+			}if (saved) {
+				SceneManager.LoadScene(currentLevel);
+			}
         }
     }
 

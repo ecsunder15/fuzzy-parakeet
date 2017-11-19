@@ -58414,6 +58414,11 @@ Prefab:
       propertyPath: deadImage
       value: 
       objectReference: {fileID: 1646386052}
+    - target: {fileID: 114771559259056032, guid: 69cb5e217d8b77d4baaf1bd77a23da91,
+        type: 2}
+      propertyPath: savedImage
+      value: 
+      objectReference: {fileID: 1646386055}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 69cb5e217d8b77d4baaf1bd77a23da91, type: 2}
   m_IsPrefabParent: 0
@@ -58507,12 +58512,12 @@ Prefab:
     - target: {fileID: 224184488772734808, guid: 0c600ee110ef45f4c9e301926878e1e8,
         type: 2}
       propertyPath: m_LocalPosition.x
-      value: 424.5
+      value: 327.5
       objectReference: {fileID: 0}
     - target: {fileID: 224184488772734808, guid: 0c600ee110ef45f4c9e301926878e1e8,
         type: 2}
       propertyPath: m_LocalPosition.y
-      value: 210.5
+      value: 202
       objectReference: {fileID: 0}
     - target: {fileID: 224081088381731840, guid: 0c600ee110ef45f4c9e301926878e1e8,
         type: 2}
@@ -58723,3 +58728,8 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 0
+--- !u!1 &1646386055 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 1945810166630706, guid: 0c600ee110ef45f4c9e301926878e1e8,
+    type: 2}
+  m_PrefabInternal: {fileID: 1646386049}
