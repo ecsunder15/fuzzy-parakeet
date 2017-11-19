@@ -19,10 +19,10 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4970613415767056}
+  - component: {fileID: 114771559259056032}
   - component: {fileID: 212631025818463746}
   - component: {fileID: 61047669056812268}
   - component: {fileID: 50768719747061718}
-  - component: {fileID: 114771559259056032}
   - component: {fileID: 95473145924405080}
   - component: {fileID: 82031700553222754}
   m_Layer: 0
@@ -202,9 +202,10 @@ MonoBehaviour:
   jumpSpeed: 30
   delta: 2
   health: 50
-  healthBar: {fileID: 0}
-  timeText: {fileID: 0}
-  deadText: {fileID: 0}
+  healthBar: {fileID: 114948093697947632, guid: 0c600ee110ef45f4c9e301926878e1e8,
+    type: 2}
+  timeText: {fileID: 114311694454686818, guid: 0c600ee110ef45f4c9e301926878e1e8, type: 2}
+  deadImage: {fileID: 1039955135738210, guid: 0c600ee110ef45f4c9e301926878e1e8, type: 2}
   facingLeft: 0
   dead: 0
   MusicClip: {fileID: 8300000, guid: 646d6141811744733a8794e0aea23928, type: 3}

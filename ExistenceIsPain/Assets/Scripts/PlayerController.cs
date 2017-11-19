@@ -31,7 +31,7 @@ public class PlayerController : MonoBehaviour {
 
     public Slider healthBar;
     public Text timeText;
-    public Text deadText;
+	public GameObject deadImage;
 
     private KeyCode right = KeyCode.D;
 	private KeyCode left = KeyCode.A;
@@ -40,7 +40,6 @@ public class PlayerController : MonoBehaviour {
 
 	Animator anim;
 	public bool facingLeft;
-
 	public bool dead = false;
 
 	public AudioClip MusicClip;
@@ -161,7 +160,7 @@ public class PlayerController : MonoBehaviour {
             timeOfDeath = Time.fixedTime;
 			dead = true;
 			anim.SetBool ("Died", true);
-            deadText.text = "Congratulations, you got R3KT!";
+			deadImage.SetActive(true);
         }
 
     }
