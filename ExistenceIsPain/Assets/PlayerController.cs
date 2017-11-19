@@ -28,15 +28,16 @@ public class PlayerController : MonoBehaviour {
 	private KeyCode jump = KeyCode.Space;
     private KeyCode reset = KeyCode.R;
 
-	//KREEEEE
 	Animator anim;
 	public bool facingLeft;
+
+	public bool dead = false;
+
 
 	// Use this for initialization
 	void Start () {
 		player = this.gameObject.transform;
 
-		//KREEEEEE
 		anim = GetComponent<Animator>();
 		facingLeft = false;
 	}
@@ -53,7 +54,6 @@ public class PlayerController : MonoBehaviour {
 			if (velocity.x < 0)
 				velocity.x = 0;
 
-			//KREEEEEE
 			facingLeft = false;
 
 		} 
@@ -65,7 +65,6 @@ public class PlayerController : MonoBehaviour {
 			if (velocity.x > 0)
 				velocity.x = 0;
 
-			//KREEEEEE
 			facingLeft = true;
 
 		} 
@@ -76,6 +75,9 @@ public class PlayerController : MonoBehaviour {
 		if (jumps < maxJumps && Input.GetKeyDown (jump)) {
 			velocity.y += jumpSpeed;
 			jumps += 1;
+
+			//dealDamage();
+
 		} else {
 			velocity.y *= .8f;
 		}
@@ -86,20 +88,16 @@ public class PlayerController : MonoBehaviour {
 
 		player.position += velocity * Time.deltaTime;
 
-
-		//KREEEEE
 		 
 		{
 			float move = velocity.x;
-			//float move = Input.GetAxis ("Horizontal");
 			anim.SetFloat ("Speed", move);
 			anim.SetBool ("FacingLeft", facingLeft);
 		}
-		//unkree
 
 	}
 
-    void dealDamagae(float damage = 5)
+    void dealDamage(float damage = 5)
     {
         health -= damage;
         updateHealth();
@@ -121,7 +119,10 @@ public class PlayerController : MonoBehaviour {
     {
         if (health <= 0)
         {
-            SceneManager.LoadScene(1);
+			dead = true;
+			anim.SetBool ("Died", true);
+            //SceneManager.LoadScene(1);
+
         }
 
     }
@@ -134,11 +135,11 @@ public class PlayerController : MonoBehaviour {
 
         if (collide.gameObject.tag == "Projectile")
         {
-            dealDamagae();
+            dealDamage();
         }
         if (collide.gameObject.tag == "Spikes")
         {
-            dealDamagae();
+            dealDamage();
         }
 
         if (collide.gameObject.tag == "Health")
