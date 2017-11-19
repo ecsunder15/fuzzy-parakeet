@@ -5,6 +5,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
+
 public class PlayerController : MonoBehaviour {
 
 	private int jumps = 0;
@@ -33,6 +34,8 @@ public class PlayerController : MonoBehaviour {
 
 	public bool dead = false;
 
+	public AudioClip MusicClip;
+	public AudioSource MusicSource;
 
 	// Use this for initialization
 	void Start () {
@@ -41,6 +44,8 @@ public class PlayerController : MonoBehaviour {
 
 		anim = GetComponent<Animator>();
 		facingLeft = false;
+
+		MusicSource.clip = MusicClip;
 	}
 	
 	// Update is called once per frame
@@ -85,6 +90,8 @@ public class PlayerController : MonoBehaviour {
 		if (jumps < maxJumps && Input.GetKeyDown (jump)) {
 			velocity.y += jumpSpeed;
 			jumps += 1;
+
+			MusicSource.Play ();
 
 			//dealDamage();
 
