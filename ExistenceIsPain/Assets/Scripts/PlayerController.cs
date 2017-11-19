@@ -21,6 +21,7 @@ public class PlayerController : MonoBehaviour {
     private float maxHealth = 100f;
     private float healAmount = 5;
     private float damageAmount = 10;
+	private Scene scene;
 
     public Slider healthBar;
 
@@ -46,8 +47,9 @@ public class PlayerController : MonoBehaviour {
 		facingLeft = false;
 
 		MusicSource.clip = MusicClip;
+		scene = SceneManager.GetActiveScene();
 	}
-	
+
 	// Update is called once per frame
 	void Update () {
 
@@ -71,7 +73,7 @@ public class PlayerController : MonoBehaviour {
 
 			facingLeft = false;
 
-		} 
+		}
 		else if (Input.GetKey (left)) {
 			velocity.x -= delta;
 			if (velocity.x < -1* maxSpeed) {
@@ -82,11 +84,11 @@ public class PlayerController : MonoBehaviour {
 
 			facingLeft = true;
 
-		} 
+		}
 		else {
 			velocity.x = 0;
 		}
-			
+
 		if (jumps < maxJumps && Input.GetKeyDown (jump)) {
 			velocity.y += jumpSpeed;
 			jumps += 1;
@@ -98,7 +100,7 @@ public class PlayerController : MonoBehaviour {
 		} else {
 			velocity.y *= .8f;
 		}
-        
+
         if (Input.GetKeyDown(KeyCode.DownArrow))
         {
             dealDamage();
@@ -106,7 +108,7 @@ public class PlayerController : MonoBehaviour {
 
         player.position += velocity * Time.deltaTime;
 
-		 
+
 		{
 			float move = velocity.x;
 			anim.SetFloat ("Speed", move);
@@ -115,7 +117,7 @@ public class PlayerController : MonoBehaviour {
 
 	}
 
-    void dealDamage(float damage = 5)
+    void dealDamage(float damage = 10)
     {
         health -= damage;
         updateHealth();
@@ -135,10 +137,21 @@ public class PlayerController : MonoBehaviour {
 
     void checkHealth()
     {
+		string currentLevel = scene.name;
+
         if (health <= 0)
         {
 			dead = true;
 			anim.SetBool ("Died", true);
+
+			switch (currentLevel) {
+			case "Level1":
+				SceneManager.LoadScene ("Level2");
+				break;
+			case "Level2":
+				SceneManager.LoadScene ("Level3");
+				break;
+			}
             //SceneManager.LoadScene(1);
 
         }
@@ -166,5 +179,5 @@ public class PlayerController : MonoBehaviour {
         }
     }
 
-    
+
 }
