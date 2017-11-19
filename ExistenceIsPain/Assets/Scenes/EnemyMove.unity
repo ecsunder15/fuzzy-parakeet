@@ -124,6 +124,7 @@ GameObject:
   - component: {fileID: 279494332}
   - component: {fileID: 279494335}
   - component: {fileID: 279494336}
+  - component: {fileID: 279494337}
   m_Layer: 0
   m_Name: Enemy
   m_TagString: Untagged
@@ -147,7 +148,7 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1, y: 1}
+    oldSize: {x: 1.8125, y: 1.09375}
     newSize: {x: 1, y: 1}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
@@ -190,7 +191,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: f2208a1d244c2fd4eb581b9de2b6778e, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 0015cbad332ab6a468258cbd63e086d1, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -246,6 +247,23 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rotateSpeed: 2
   radius: 5
+--- !u!95 &279494337
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 279494331}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 9e754fbd647004e4b864a63f17b1f1f2, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
 --- !u!1 &426265177
 GameObject:
   m_ObjectHideFlags: 0
@@ -433,7 +451,7 @@ RectTransform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 704293342}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -275.5, y: 131.5, z: 0}
+  m_LocalPosition: {x: -140, y: 167, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 540898950}
@@ -666,6 +684,10 @@ MonoBehaviour:
   delta: 2
   health: 50
   healthBar: {fileID: 704293344}
+  facingLeft: 0
+  dead: 0
+  MusicClip: {fileID: 0}
+  MusicSource: {fileID: 0}
 --- !u!1 &1070095639
 GameObject:
   m_ObjectHideFlags: 0
@@ -876,7 +898,7 @@ RectTransform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1434332897}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -275.5, y: 143, z: 0}
+  m_LocalPosition: {x: -140, y: 178.5, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1879352239}
@@ -1050,7 +1072,7 @@ RectTransform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1879352235}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 375.5, y: 175, z: 0}
+  m_LocalPosition: {x: 240, y: 210.5, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 704293343}
