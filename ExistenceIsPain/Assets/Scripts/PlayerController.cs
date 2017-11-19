@@ -20,11 +20,20 @@ public class PlayerController : MonoBehaviour {
     public float health = 50f;
     private float maxHealth = 100f;
     private float healAmount = 5;
-    private float damageAmount = 10;
+    private float damageAmount = 100;
+	private Scene scene;
+
+    private float deadTime = 1.5f;
+    private float timeOfDeath;
+
+    private float startTime = 0f;
+    private float timeAlive = 0f;
 
     public Slider healthBar;
+    public Text timeText;
+    public Text deadText;
 
-	private KeyCode right = KeyCode.D;
+    private KeyCode right = KeyCode.D;
 	private KeyCode left = KeyCode.A;
 	private KeyCode jump = KeyCode.Space;
     private KeyCode reset = KeyCode.R;
@@ -42,24 +51,30 @@ public class PlayerController : MonoBehaviour {
 		player = this.gameObject.transform;
         updateHealth();
 
+        startTime = Time.fixedTime;
+        timeAlive = 0f;
 		anim = GetComponent<Animator>();
 		facingLeft = false;
 
 		MusicSource.clip = MusicClip;
+		scene = SceneManager.GetActiveScene();
 	}
-	
+
 	// Update is called once per frame
 	void Update () {
 
         if (Input.GetKeyDown(reset))
         {
-            SceneManager.LoadScene("Level1");
+            string currentLevel = scene.name;
+            SceneManager.LoadScene(currentLevel);
         }
 
         if (dead)
         {
+            updateScene();
             return;
         }
+        updateTime();
 
 		if (Input.GetKey (right)) {
 			velocity.x += delta;
@@ -71,7 +86,7 @@ public class PlayerController : MonoBehaviour {
 
 			facingLeft = false;
 
-		} 
+		}
 		else if (Input.GetKey (left)) {
 			velocity.x -= delta;
 			if (velocity.x < -1* maxSpeed) {
@@ -82,11 +97,11 @@ public class PlayerController : MonoBehaviour {
 
 			facingLeft = true;
 
-		} 
+		}
 		else {
 			velocity.x = 0;
 		}
-			
+
 		if (jumps < maxJumps && Input.GetKeyDown (jump)) {
 			velocity.y += jumpSpeed;
 			jumps += 1;
@@ -98,7 +113,7 @@ public class PlayerController : MonoBehaviour {
 		} else {
 			velocity.y *= .8f;
 		}
-        
+
         if (Input.GetKeyDown(KeyCode.DownArrow))
         {
             dealDamage();
@@ -106,7 +121,7 @@ public class PlayerController : MonoBehaviour {
 
         player.position += velocity * Time.deltaTime;
 
-		 
+
 		{
 			float move = velocity.x;
 			anim.SetFloat ("Speed", move);
@@ -115,34 +130,74 @@ public class PlayerController : MonoBehaviour {
 
 	}
 
-    void dealDamage(float damage = 5)
+    private void dealDamage(float damage = 100)
     {
         health -= damage;
         updateHealth();
     }
 
-    void heal(float damage = 5)
+    public void updateTime()
+    {
+        timeAlive = Time.fixedTime - startTime;
+        timeText.text = "Time: " + timeAlive.ToString("F2");
+    }
+    private void heal(float damage = 5)
     {
         health += damage;
         updateHealth();
     }
 
-    void updateHealth()
+    private void updateHealth()
     {
         healthBar.value = health / maxHealth;
         checkHealth();
     }
 
-    void checkHealth()
+    private void checkHealth()
     {
+		
         if (health <= 0)
         {
+            timeOfDeath = Time.fixedTime;
 			dead = true;
 			anim.SetBool ("Died", true);
-            //SceneManager.LoadScene(1);
-
+            deadText.text = "Congratulations, you got R3KT!";
         }
 
+    }
+
+    private void updateScene()
+    {
+        string currentLevel = scene.name;
+
+        if (Time.fixedTime - timeOfDeath > deadTime)
+        {
+
+            switch (currentLevel)
+            {
+                case "Level1":
+                    SceneManager.LoadScene("Level2");
+                    break;
+                case "Level2":
+                    SceneManager.LoadScene("Level3");
+                    break;
+                case "Level3":
+                    SceneManager.LoadScene("Level4");
+                    break;
+                case "Level4":
+                    SceneManager.LoadScene("Level5");
+                    break;
+                case "Level5":
+                    SceneManager.LoadScene("Level6");
+                    break;
+                case "Level6":
+                    SceneManager.LoadScene("Level7");
+                    break;
+                case "Level7":
+                    SceneManager.LoadScene("Level8");
+                    break;
+            }
+        }
     }
 
 	void OnCollisionEnter2D(Collision2D collide){
@@ -166,5 +221,5 @@ public class PlayerController : MonoBehaviour {
         }
     }
 
-    
+
 }
