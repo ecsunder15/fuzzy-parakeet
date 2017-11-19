@@ -20,12 +20,20 @@ public class PlayerController : MonoBehaviour {
     public float health = 50f;
     private float maxHealth = 100f;
     private float healAmount = 5;
-    private float damageAmount = 10;
+    private float damageAmount = 100;
 	private Scene scene;
 
-    public Slider healthBar;
+    private float deadTime = 1.5f;
+    private float timeOfDeath;
 
-	private KeyCode right = KeyCode.D;
+    private float startTime = 0f;
+    private float timeAlive = 0f;
+
+    public Slider healthBar;
+    public Text timeText;
+    public Text deadText;
+
+    private KeyCode right = KeyCode.D;
 	private KeyCode left = KeyCode.A;
 	private KeyCode jump = KeyCode.Space;
     private KeyCode reset = KeyCode.R;
@@ -43,6 +51,8 @@ public class PlayerController : MonoBehaviour {
 		player = this.gameObject.transform;
         updateHealth();
 
+        startTime = Time.fixedTime;
+        timeAlive = 0f;
 		anim = GetComponent<Animator>();
 		facingLeft = false;
 
@@ -55,13 +65,16 @@ public class PlayerController : MonoBehaviour {
 
         if (Input.GetKeyDown(reset))
         {
-            SceneManager.LoadScene("Level1");
+            string currentLevel = scene.name;
+            SceneManager.LoadScene(currentLevel);
         }
 
         if (dead)
         {
+            updateScene();
             return;
         }
+        updateTime();
 
 		if (Input.GetKey (right)) {
 			velocity.x += delta;
@@ -117,60 +130,74 @@ public class PlayerController : MonoBehaviour {
 
 	}
 
-    void dealDamage(float damage = 10)
+    private void dealDamage(float damage = 100)
     {
         health -= damage;
         updateHealth();
     }
 
-    void heal(float damage = 5)
+    public void updateTime()
+    {
+        timeAlive = Time.fixedTime - startTime;
+        timeText.text = "Time: " + timeAlive.ToString("F2");
+    }
+    private void heal(float damage = 5)
     {
         health += damage;
         updateHealth();
     }
 
-    void updateHealth()
+    private void updateHealth()
     {
         healthBar.value = health / maxHealth;
         checkHealth();
     }
 
-    void checkHealth()
+    private void checkHealth()
     {
-		string currentLevel = scene.name;
-
+		
         if (health <= 0)
         {
+            timeOfDeath = Time.fixedTime;
 			dead = true;
 			anim.SetBool ("Died", true);
-
-			switch (currentLevel) {
-			case "Level1":
-				SceneManager.LoadScene ("Level2");
-				break;
-			case "Level2":
-				SceneManager.LoadScene ("Level3");
-				break;
-			case "Level3":
-				SceneManager.LoadScene ("Level4");
-				break;
-			case "Level4":
-				SceneManager.LoadScene ("Level5");
-				break;
-			case "Level5":
-				SceneManager.LoadScene ("Level6");
-				break;
-			case "Level6":
-				SceneManager.LoadScene ("Level7");
-				break;
-			case "Level7":
-				SceneManager.LoadScene ("Level8");
-				break;
-			}
-            //SceneManager.LoadScene(1);
-
+            deadText.text = "Congratulations, you got R3KT!";
         }
 
+    }
+
+    private void updateScene()
+    {
+        string currentLevel = scene.name;
+
+        if (Time.fixedTime - timeOfDeath > deadTime)
+        {
+
+            switch (currentLevel)
+            {
+                case "Level1":
+                    SceneManager.LoadScene("Level2");
+                    break;
+                case "Level2":
+                    SceneManager.LoadScene("Level3");
+                    break;
+                case "Level3":
+                    SceneManager.LoadScene("Level4");
+                    break;
+                case "Level4":
+                    SceneManager.LoadScene("Level5");
+                    break;
+                case "Level5":
+                    SceneManager.LoadScene("Level6");
+                    break;
+                case "Level6":
+                    SceneManager.LoadScene("Level7");
+                    break;
+                case "Level7":
+                    SceneManager.LoadScene("Level8");
+                    break;
+            }
+        }
     }
 
 	void OnCollisionEnter2D(Collision2D collide){
