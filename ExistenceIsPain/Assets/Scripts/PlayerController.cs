@@ -37,6 +37,7 @@ public class PlayerController : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 		player = this.gameObject.transform;
+        updateHealth();
 
 		anim = GetComponent<Animator>();
 		facingLeft = false;
@@ -45,6 +46,15 @@ public class PlayerController : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 
+        if (Input.GetKeyDown(reset))
+        {
+            SceneManager.LoadScene("Level1");
+        }
+
+        if (dead)
+        {
+            return;
+        }
 
 		if (Input.GetKey (right)) {
 			velocity.x += delta;
@@ -81,12 +91,13 @@ public class PlayerController : MonoBehaviour {
 		} else {
 			velocity.y *= .8f;
 		}
+        
+        if (Input.GetKeyDown(KeyCode.DownArrow))
+        {
+            dealDamage();
+        }
 
-		if (Input.GetKeyDown (reset)) {
-			SceneManager.LoadScene(0);
-		}
-
-		player.position += velocity * Time.deltaTime;
+        player.position += velocity * Time.deltaTime;
 
 		 
 		{
