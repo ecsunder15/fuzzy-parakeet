@@ -42,6 +42,8 @@ public class PlayerController : MonoBehaviour {
 	public bool facingLeft;
 	public bool dead = false;
 
+	private CapsuleCollider2D playerCollider;
+
 	public AudioClip MusicClip;
 	public AudioSource MusicSource;
 
@@ -49,6 +51,8 @@ public class PlayerController : MonoBehaviour {
 	void Start () {
 		player = this.gameObject.transform;
         updateHealth();
+
+		playerCollider = this.gameObject.GetComponent<CapsuleCollider2D>();
 
         startTime = Time.fixedTime;
         timeAlive = 0f;
@@ -161,6 +165,7 @@ public class PlayerController : MonoBehaviour {
 			dead = true;
 			anim.SetBool ("Died", true);
 			deadImage.SetActive(true);
+			playerCollider.isTrigger = true;
         }
 
     }
