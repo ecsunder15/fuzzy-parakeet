@@ -29,11 +29,16 @@ public class EnemyController : MonoBehaviour {
 	// Update is called once per frame
 	public void Update () {
 		angle += rotateSpeed * Time.deltaTime;
-		shotTimer = Time.fixedTime;
+
 
 		//set the circular angle point thing to rotate around
 		var offset = new Vector2(Mathf.Sin(angle), Mathf.Cos(angle)) * radius;
 		transform.position = target + offset;
+
+	}
+
+	public void FixedUpdate() {
+		shotTimer = Time.fixedTime;
 
 		//fire a health pack every 2 seconds
 		if (shotTimer - timeOfLastShot > 2) {
@@ -44,16 +49,13 @@ public class EnemyController : MonoBehaviour {
 
 	void Fire() {
 		// Create the Bullet from the Bullet Prefab
-		var healthPack = (GameObject)Instantiate (
-			healthPrefab,
-			healthSpawn.position,
-			healthSpawn.rotation);
+		GameObject healthPack = (GameObject)Instantiate (healthPrefab, healthSpawn.position, healthSpawn.rotation);
 
 		// Add velocity to the bullet
-		//healthPack.GetComponent<Rigidbody>().velocity = healthPack.transform.forward * 3;
+		healthPack.GetComponent<Rigidbody2D>().velocity = transform.right * -7f;
 
-		// Destroy the bullet after 2 seconds
-		Destroy(healthPack, 2.0f);
+		// Destroy the bullet after 3 seconds
+		Destroy(healthPack, 3.0f);
 	}
 
 }
