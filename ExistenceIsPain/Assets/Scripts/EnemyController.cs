@@ -41,7 +41,7 @@ public class EnemyController : MonoBehaviour {
 		shotTimer = Time.fixedTime;
 
 		//fire a health pack every 2 seconds
-		if (shotTimer - timeOfLastShot > 2) {
+		if (shotTimer - timeOfLastShot > 0.5f) {
 			timeOfLastShot = shotTimer;
 			Fire ();
 		}
