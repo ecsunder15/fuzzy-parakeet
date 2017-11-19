@@ -38,6 +38,8 @@ public class PlayerController : MonoBehaviour {
 	private KeyCode left = KeyCode.A;
 	private KeyCode jump = KeyCode.Space;
     private KeyCode reset = KeyCode.R;
+	private KeyCode home = KeyCode.H;
+
 
 	Animator anim;
 	public bool facingLeft;
@@ -48,6 +50,9 @@ public class PlayerController : MonoBehaviour {
 
 	public AudioClip MusicClip;
 	public AudioSource MusicSource;
+
+	public AudioClip MusicClip2;
+	public AudioSource MusicSource2;
 
 	// Use this for initialization
 	void Start () {
@@ -62,6 +67,7 @@ public class PlayerController : MonoBehaviour {
 		facingLeft = false;
 
 		MusicSource.clip = MusicClip;
+		MusicSource2.clip = MusicClip2;
 		scene = SceneManager.GetActiveScene();
 	}
 
@@ -73,6 +79,12 @@ public class PlayerController : MonoBehaviour {
             string currentLevel = scene.name;
             SceneManager.LoadScene(currentLevel);
         }
+
+		if (Input.GetKeyDown(home))
+		{
+			
+			SceneManager.LoadScene("StartScreen");
+		}
 
 		if (dead || saved)
         {
@@ -162,6 +174,8 @@ public class PlayerController : MonoBehaviour {
     private void checkHealth()
     {
 		if (health >= 100f) {
+
+			MusicSource2.Stop();
 			timeOfDeath = Time.fixedTime;
 			saved = true;
 			savedImage.SetActive (true);
@@ -169,6 +183,8 @@ public class PlayerController : MonoBehaviour {
 			return;
 		}
 		if (health <= 0) {
+
+			MusicSource2.Stop();
 			timeOfDeath = Time.fixedTime;
 			dead = true;
 			anim.SetBool ("Died", true);
