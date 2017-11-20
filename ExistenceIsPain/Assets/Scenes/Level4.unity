@@ -184,12 +184,12 @@ Prefab:
     - target: {fileID: 224184488772734808, guid: 0c600ee110ef45f4c9e301926878e1e8,
         type: 2}
       propertyPath: m_LocalPosition.x
-      value: 424.5
+      value: 255.5
       objectReference: {fileID: 0}
     - target: {fileID: 224184488772734808, guid: 0c600ee110ef45f4c9e301926878e1e8,
         type: 2}
       propertyPath: m_LocalPosition.y
-      value: 205
+      value: 203
       objectReference: {fileID: 0}
     - target: {fileID: 224780251083966918, guid: 0c600ee110ef45f4c9e301926878e1e8,
         type: 2}
@@ -438,6 +438,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rotateSpeed: 2
   radius: 3
+  healthPrefab: {fileID: 1959954677961322, guid: e33482a4c5b494cb6834c768a5e3cbda,
+    type: 2}
+  healthSpawn: {fileID: 1282768191}
+  timeOfLastShot: 0
+  waitingTime: 2
 --- !u!50 &1282768188
 Rigidbody2D:
   serializedVersion: 4
@@ -609,7 +614,7 @@ Camera:
   far clip plane: 1000
   field of view: 60
   orthographic: 1
-  orthographic size: 4.91
+  orthographic size: 5.96
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2

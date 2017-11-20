@@ -21,6 +21,7 @@ public class EnemyController : MonoBehaviour {
 	public float timeOfLastShot;
 	public float waitingTime;
 
+
 	// Use this for initialization
 	public void Start () {
 		target = transform.position;
@@ -41,7 +42,7 @@ public class EnemyController : MonoBehaviour {
 		shotTimer = Time.fixedTime;
 
 		//fire a health pack every 2 seconds
-		if (shotTimer - timeOfLastShot > 0.5f) {
+		if (shotTimer - timeOfLastShot > waitingTime) {
 			timeOfLastShot = shotTimer;
 			Fire ();
 		}
