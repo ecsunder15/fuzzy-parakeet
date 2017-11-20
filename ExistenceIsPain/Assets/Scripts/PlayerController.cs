@@ -63,6 +63,7 @@ public class PlayerController : MonoBehaviour {
 
         startTime = Time.fixedTime;
         timeAlive = 0f;
+
 		anim = GetComponent<Animator>();
 		facingLeft = false;
 
@@ -82,7 +83,7 @@ public class PlayerController : MonoBehaviour {
 
 		if (Input.GetKeyDown(home))
 		{
-			
+
 			SceneManager.LoadScene("StartScreen");
 		}
 
@@ -248,6 +249,7 @@ public class PlayerController : MonoBehaviour {
         if (collide.gameObject.tag == "Health")
         {
             heal();
+			collide.gameObject.SetActive (false);
         }
     }
 
