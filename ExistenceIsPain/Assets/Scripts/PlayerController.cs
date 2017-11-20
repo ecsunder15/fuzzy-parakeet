@@ -224,6 +224,22 @@ public class PlayerController : MonoBehaviour {
 				case "Level7":
 					SceneManager.LoadScene ("Level8");
 					break;
+				case "Level8":
+					SceneManager.LoadScene ("Level9");
+					break;
+				case "Level9":
+					SceneManager.LoadScene ("Level10");
+					break;
+				case "Level10":
+					SceneManager.LoadScene ("Level11");
+					break;
+				case "Level11":
+					SceneManager.LoadScene ("BossFight");
+					break;
+				case "BossFight":
+					SceneManager.LoadScene ("LevelWin");
+					break;
+
 				}
 			}if (saved) {
 				SceneManager.LoadScene(currentLevel);
